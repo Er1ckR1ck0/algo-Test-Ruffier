@@ -1,40 +1,52 @@
 import backend.data as data
-from backend.instructions import txt_test1
+from backend.instructions import txt_instruction
 from frontend.components import *
 
 
-class FirstScreen(Screen):
+class MainScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         main_layout = BoxLayout(orientation="vertical")
-        instruction = Label(text=txt_test1)
+        instruction = Label(text=txt_instruction)
 
-        self.p1_input = TextInput(size_hint=(0.05, 0.75))
+        self.name_input, self.age_input = [
+            TextInput(size_hint=(0.05, 0.75)) for i in range(2)
+        ]
 
-        p1_layout = BoxLayout(
-            size_hint=(0.75, 0.15), pos_hint={"center_x": 0.5}, padding=4
-        )
+        name_layout, age_layout = [
+            BoxLayout(size_hint=(0.75, 0.15), pos_hint={"center_x": 0.5}, padding=4)
+            for i in range(2)
+        ]
 
-        p1_layout.add_widget(Label(text="Введите пульс:", size_hint=(0.05, 0.35)))
-        p1_layout.add_widget(self.p1_input)
+        name_layout.add_widget(Label(text="Введите имя:", size_hint=(0.05, 0.35)))
+        name_layout.add_widget(self.name_input)
+        age_layout.add_widget(Label(text="Введите возраст:", size_hint=(0.05, 0.35)))
+        age_layout.add_widget(self.age_input)
 
-        self.button = MyButton(self, "second_screen", "left", text="Продолжить")
+        self.button = MyButton(self, "first_screen", "left", text="Начать")
         self.button.on_press = self.next
 
         main_layout.add_widget(instruction)
-        main_layout.add_widget(p1_layout)
+        main_layout.add_widget(name_layout)
+        main_layout.add_widget(age_layout)
         main_layout.add_widget(self.button)
         self.add_widget(main_layout)
 
     def next(self):
         try:
-            p1 = int(self.p1_input.text)
+            age = int(self.age_input.text)
+            name = self.name_input.text
 
-            if not (10 <= p1 <= 40):
-                self.p1_input.text = "Как может быть такой пульс за 15 секунд?"
-                raise Exception("За пределами пульса")
+            if " " in name:
+                self.name_input.text = "Введите имя без пробелов"
+                raise Exception("Имя с пробелами")
 
-            data.P1 = p1
+            if not (7 <= age <= 80):
+                self.age_input.text = "Данный возраст не подход"
+                raise Exception("За пределами возраста")
+
+            data.age = age
+            data.name = name
 
             self.button.next()
 

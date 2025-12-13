@@ -9,7 +9,7 @@ class FinalScreen(Screen):
     @classmethod
     def update(cls):
         cls.instruction.text = test(data.P1, data.P2, data.P3, data.age)
-
+    
     def __init__(self, **kw):
         super().__init__(**kw)
         main_layout = BoxLayout(orientation="vertical")
