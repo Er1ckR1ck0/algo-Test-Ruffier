@@ -3,7 +3,7 @@ from backend.instructions import txt_instruction
 from frontend.components import *
 
 
-class MainScreen(Screen):
+class FirstScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         main_layout = BoxLayout(orientation="vertical")

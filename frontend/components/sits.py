@@ -1,9 +1,6 @@
-from kivy.uix.label import Label
+from .counter import BaseCounter
 
-
-class Sits(Label):
+class Sits(BaseCounter):
+    
     def __init__(self, total, **kwargs):
-        pass
-
-    def next(self, *args):
-        pass
+        super().__init__(total=total, text="приседаний")

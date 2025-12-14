@@ -3,7 +3,7 @@ from backend.ruffier import test
 from frontend.components import *
 
 
-class FinalScreen(Screen):
+class FifthScreen(Screen):
     instruction = Label(text="Nope")
 
     @classmethod

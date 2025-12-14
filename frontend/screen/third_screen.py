@@ -4,13 +4,13 @@ from backend.instructions import txt_sits
 from frontend.components import *
 
 
-class SecondScreen(Screen):
+class ThirdScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         main_layout = BoxLayout(orientation="vertical")
         instruction = Label(text=txt_sits)
         
-        self.timer = Seconds(4)
+        self.timer = Sits(15)
         self.timer.bind(done=self.next)
         
         self.button = MyButton(self, "third_screen", "left", text="Продолжить")
